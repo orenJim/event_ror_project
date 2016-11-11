@@ -1,0 +1,68 @@
+<style>
+
+	@media only screen and (max-width: 480px){
+		body {background-image: url(/assets/create.jpg);
+		background-size: cover;}
+	}
+
+	@media only screen and (min-width: 481px){
+		body {background-image: url(/assets/create.jpg);
+		background-size: cover;}
+	}
+
+	@media only screen and (min-width: 1024px){
+		body {background-image: url(/assets/create.jpg);
+		background-size: cover;}
+	}
+
+	#wrapper{
+		margin: auto;
+		padding: 10px;
+		padding-left: 25px;
+		width: 300px;
+		height: 350px;
+		border: 5px solid black;
+		border-radius: 5px;
+		background-color: #ffffff;
+		opacity: 0.8;
+		filter: alpha(opacity=80);
+		font-family: "gill sans";
+	}
+
+	label, input{
+		display: block;
+		font-size: 1rem;
+	}
+
+	a, button{
+		text-decoration: none;
+		color: black;
+		background-color: lightgrey;
+		border: 1px solid black;
+		border-radius: 5px;
+		padding: 1px 3px 1px 3px;
+		margin-top: 25px;
+		font-size: 1rem;
+	}
+</style>
+
+
+<div id="wrapper">
+	<h1>Create an event!</h1>
+
+	<div id="addevent">
+		<form action="/create" method="post">
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			<input type="hidden" name="event[user_id]" value="<%= current_user.id %>">
+			<label>Name: <input type="text" name="event[name]"></label>
+			<label>Description: <input type="text" name="event[description]"></label>
+			<label>When: <input type="datetime-local" name="event[when]"></label>
+			<label>Where: <input type="text" name="event[where]"></label>
+			<button type="submit">CREATE</button>
+		</form>
+	</div>
+
+	<form action="/events/<%= current_user.id %>" method="get">
+		<button type="submit" class="buttons">BACK</button>
+	</form>
+</div>

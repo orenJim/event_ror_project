@@ -1,0 +1,152 @@
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAZGR5gGXpA271EV-DT6QlNS9sBOWhtSeU"></script>
+<script>
+	var myCenter = new google.maps.LatLng(<%= @event.latitude %>,<%= @event.longitude %>);
+	var marker;
+	function initialize() {
+	  var mapProp = {
+	    center: myCenter,
+	    zoom:14,
+	    mapTypeId:google.maps.MapTypeId.ROADMAP
+	  };
+	  var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+	  var marker=new google.maps.Marker({
+		  position:myCenter,
+		  animation:google.maps.Animation.BOUNCE
+		  });
+
+		marker.setMap(map);
+			}
+	google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<style>
+
+	@media only screen and (max-width: 480px){
+		body {background-image: url(/assets/BBQPoolParty.jpg);
+		background-size: cover;}
+	}
+
+	@media only screen and (min-width: 481px){
+		body {background-image: url(/assets/BBQPoolParty.jpg);
+		background-size: cover;}
+	}
+
+	@media only screen and (min-width: 1024px){
+		body {background-image: url(/assets/BBQPoolParty.jpg);
+		background-size: cover;}
+	}
+
+	#wrapper {
+		margin: auto;
+		padding: 10px;
+		padding-left: 25px;
+		width: 750px;
+		height: auto;
+		border: 5px solid black;
+		border-radius: 5px;
+		background-color: #ffffff;
+		opacity: 1;
+		filter: alpha(opacity=100);
+		font-family: "gill sans";
+	}
+
+	#header, #main{
+		display: block;
+	}
+
+	#main{
+		margin-top: 25px;
+	}
+
+	.item > p, .item > button, .item > span{
+		display: inline;
+	}
+
+	/*a{
+		text-decoration: none;
+		color: black;
+		background-color: lightgrey;
+		border: 1px solid black;
+		border-radius: 5px;
+		padding: 1px 3px 1px 3px;
+		margin-top: 15px;
+	}*/
+	.buttons{
+		text-decoration: none;
+		color: black;
+		background-color: lightgrey;
+		border: 1px solid black;
+		border-radius: 5px;
+		padding: 1px 3px 1px 3px;
+		margin-top: 15px;
+	}
+	.items li{
+		display: inline;
+	}
+	.items p{
+		display: inline;
+	}
+	.items form{
+		display: inline;
+	}
+
+</style>
+
+<div id="wrapper">
+<div id="header">
+	<h1><%= @event.name %>!</h1>
+	<h3>Hosted by: <%= @event.user.first_name %></h3>
+</div>
+
+<div id="main">
+
+	<h3>Description:</h3>
+	<p><%= @event.description %></p>
+
+	<h3>Where:</h3>
+	<p><%= @event.where %></p>
+	<div id="googleMap" style="width:500px;height:380px;border:3px solid black;"></div>
+	
+	<h3>When:</h3>
+	<p><%= @event.when.strftime "%b/%-d/%Y %l:%M %p" %></p>
+
+	<h3>Attendees:</h3>
+	<% @attendees.each do |a| %>
+	<p><%= a.first_name %> <%= a.last_name %> <%= a.email %></p>
+	<% end %>
+
+	<h3>Items Needed:</h3>
+		<% if @item %>
+		<% @item.each do |i| %>
+		<div class="items">
+			<p><%= i.item %></p>
+			<% if i.user_id != current_user.id && i.status == 0 %>
+				<form action="/bring/<%= i.id %>" method="post">
+					<input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+					<input type="hidden" name="_method" value="patch">
+		    		<input type='hidden' name='item[status]' value='1'>
+		      		<input type="hidden" name='item[user_id]' value='<%= current_user.id %>'>
+		      		<input type="hidden" name="item[event_id]" value="<%= @event.id %>">
+		    		<button type="submit" class="buttons">I'll bring it!</button>
+				</form>
+			<% end %>
+			<% if i.user_id == current_user.id && i.status == 1 %>
+				<p>You're bringing it!<p>
+			<% end %>
+			<% end %>
+			<% end %>
+		</div>
+
+	<form action="/rsvp/<%= @event.id %>" method="post">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		<input type="hidden" name="attendee[event_id]" value="<%= @event.id %>">
+		<input type="hidden" name="attendee[user_id]" value="<%= current_user.id %>">
+		<button type="submit" class= 'buttons'>RSVP</button>
+	</form>
+
+	<form action="/events/<%= current_user.id %>" method="get">
+		<button type="submit" class="buttons">BACK</button>
+	</form>
+
+</div>
+</div>

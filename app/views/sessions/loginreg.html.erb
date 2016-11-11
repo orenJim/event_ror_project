@@ -1,0 +1,96 @@
+<header>
+	
+	<style>
+		@media only screen and (max-width: 480px){
+			body {background-image: url(/assets/wedding.jpg);
+				background-size: cover;}
+		}
+
+		@media only screen and (min-width: 481px){
+			body {background-image: url(/assets/wedding.jpg);
+			background-size: cover;}
+		}
+
+		@media only screen and (min-width: 1024px){
+			body {background-image: url(/assets/wedding.jpg);
+			background-size: cover;}
+		}
+
+		#wrapper{
+			margin: auto;
+			padding: 5px;
+			background-color: #ffffff;
+			border: 5px solid black;
+			opacity: 0.8;
+			filter: alpha(opacity=80); /*for IE8 or earlier*/
+			width: 350px;
+			height: auto;
+			border-radius: 10px;
+			margin-top: 50px;
+			text-align: left;
+			padding-left: 75px;
+			padding-top: 30px;
+			font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+			font-size: 1rem;
+		}
+
+		label, input{
+			display: block;
+		}
+
+		input{
+			width: 250px;
+			height: 15px;
+			font-size: 1rem;
+		}
+
+		button{
+			margin-left: 50px;
+			margin-top: 15px;
+			margin-bottom: 50px;
+			width: 100px;
+			height: 25px;
+			font-size: 1rem;
+			background-color: darkgrey;
+			border-radius: 5px;
+		}
+
+	</style>
+
+	
+</header>
+<div id="wrapper">
+<% if flash[:errors] %>
+	<% flash[:errors].each do |error| %>
+	<p><%= error %></p>
+	<% end %>
+<% end %>
+
+<% if flash[:messages] %>
+	<% flash[:messages].each do |message| %>
+	<p><%= message %></p>
+	<% end %>
+<% end %>
+	<h1>Welcome!</h1>
+	<div id="registration">
+		<h2>Register</h2>
+		<form action="/register" method="post">
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+				<label>First Name: <input type='text' name='user[first_name]'></label>
+				<label>Last Name: <input type='text' name='user[last_name]'></label>
+				<label>Email: <input type='text' name='user[email]'></label>
+				<label>Password: <input type='password' name='user[password]'></label>
+				<label>Password Confirmation: <input type='password' name='user[password_confirm]'></label>
+			<button type="submit">REGISTER</button>
+		</form>
+	</div>
+	<div id="login">
+		<h2>Login</h2>
+		<form action="/login" method="post">
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+				<label>Email: <input type='text' name='email'></label>
+				<label>Password: <input type='password' name='password'></label>
+			<button type="submit">LOGIN</button>
+		</form>
+	</div>
+</div>

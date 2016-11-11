@@ -1,0 +1,88 @@
+<style>
+
+	@media only screen and (max-width: 480px){
+		body {background-image: url(/assets/create.jpg);
+		background-size: cover;}
+	}
+
+	@media only screen and (min-width: 481px){
+		body {background-image: url(/assets/create.jpg);
+		background-size: cover;}
+	}
+
+	@media only screen and (min-width: 1024px){
+		body {background-image: url(/assets/create.jpg);
+		background-size: cover;}
+	}
+
+	#wrapper{
+		margin: auto;
+		padding: 10px;
+		padding-left: 25px;
+		width: 300px;
+		height: auto;
+		border: 5px solid black;
+		border-radius: 5px;
+		background-color: #ffffff;
+		opacity: 0.8;
+		filter: alpha(opacity=80);
+		font-family: "gill sans";
+	}
+
+	#items, #guests{
+		display: block;
+	}
+
+	a{
+		text-decoration: none;
+		color: black;
+		background-color: lightgrey;
+		border: 1px solid black;
+		border-radius: 5px;
+		padding: 1px 3px 1px 3px;
+		margin-top: 25px;
+	}
+
+	input{
+		font-size: 1rem;
+	}
+
+	button{
+		text-decoration: none;
+		color: black;
+		background-color: lightgrey;
+		border: 1px solid black;
+		border-radius: 5px;
+		padding: 1px 3px 1px 3px;
+		margin-top: 5px;
+		font-size: 1rem;
+	}
+</style>	
+
+<div id="wrapper">
+	<h2>Add items and guests!</h2>
+	<div id="items">
+		<h3>Items: </h3>
+		<% @item.each do |i| %>
+		<p><%= i.item %></p>
+		<% end %>
+		<form action="/items" method="post">
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			<input type="hidden" name="item[user_id]" value="<%= current_user.id %>">
+			<input type="hidden" name="item[event_id]" value="<%= @itemevent %>">
+			<input type="hidden" name="item[status]" value="0">
+			<input type="text" name="item[item]">
+			<button type="submit">ADD</button>
+		</form>
+	</div>
+
+	<div id="guests">
+		<h3>Guests: </h3>
+		<form action="/guests" method="post">
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			<input type="text" name="attendee[attendee]">
+			<button type="submit">ADD</button>
+		</form>
+	</div>
+	<p><a href="/events/<%= current_user.id %>">DONE</a></p>
+</div>

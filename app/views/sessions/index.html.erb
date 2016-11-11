@@ -1,0 +1,71 @@
+<header>
+	
+	<style>
+		@media only screen and (max-width: 480px){
+			body {background-image: url(/assets/bbq.jpg);
+				background-size: cover;}
+		}
+
+		@media only screen and (min-width: 481px){
+			body {background-image: url(/assets/bbq.jpg);
+			background-size: cover;}
+		}
+
+		@media only screen and (min-width: 1024px){
+			body {background-image: url(/assets/bbq.jpg);
+			background-size: cover;}
+		}
+
+		#main{
+			margin: auto;
+			padding: 5px;
+			background-color: #ffffff;
+			border: 5px solid black;
+			opacity: 0.8;
+			filter: alpha(opacity=80); /*for IE8 or earlier*/
+			width: 450px;
+			height: 500px;
+			border-radius: 10px;
+			margin-top: 50px;
+
+		}
+
+		#whatwedo{
+			text-align: center;
+			font-family: "gill sans";
+			font-size: 1.5rem;
+		}
+
+		a{
+			text-decoration: none;
+			color: black;
+			background-color: lightgrey;
+			border: 1px solid black;
+			border-radius: 5px;
+			padding: 1px 3px 1px 3px;
+			width: auto;
+		}
+
+		#logo{
+			font-family: copperplate;
+			font-style: italic;
+			font-weight: bold;
+		}
+	</style>
+	
+</header>
+<body>
+<div id="main">
+	<div id="whatwedo">
+	 <p> Welcome to <span id="logo">The Event</span></p>
+	 <p> You're one-stop site for easy event organization and planning </p>
+	 <p> 4 quick steps!
+	 		<p>1: Register or Login</p>
+	 		<p>2: Create and event</p>
+	 		<p>3: Add invitees</p>
+	 		<p>4: Submit!</p>
+	 	<a href="/loginreg">Log in & Register</a>
+	 </p>
+	</div>
+</div>
+</body>

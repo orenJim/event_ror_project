@@ -1,0 +1,84 @@
+<style>
+
+	@media only screen and (max-width: 480px){
+		body {background-image: url(/assets/create.jpg);
+		background-size: cover;}
+	}
+
+	@media only screen and (min-width: 481px){
+		body {background-image: url(/assets/create.jpg);
+		background-size: cover;}
+	}
+
+	@media only screen and (min-width: 1024px){
+		body {background-image: url(/assets/create.jpg);
+		background-size: cover;}
+	}
+
+	label, input{
+		display: block;
+	}
+
+	#wrapper {
+		margin: auto;
+		padding: 10px;
+		padding-left: 25px;
+		width: 450px;
+		height: auto;
+		border: 5px solid black;
+		border-radius: 5px;
+		background-color: #ffffff;
+		opacity: 0.75;
+		filter: alpha(opacity=75);
+		font-family: "gill sans";
+	}
+
+	input{
+		font-size: 1rem;
+	}
+
+
+
+	a{
+		text-decoration: none;
+		color: black;
+		background-color: lightgrey;
+		border: 1px solid black;
+		border-radius: 5px;
+		padding: 1px 3px 1px 3px;
+		margin-top: 15px;
+	}
+
+	button{
+		text-decoration: none;
+		color: black;
+		background-color: lightgrey;
+		border: 1px solid black;
+		border-radius: 5px;
+		padding: 1px 3px 1px 3px;
+		margin-top: 15px;
+	}
+
+</style>
+
+
+<div id="wrapper">
+<h1>Update <%= @event.name %>!</h1>
+
+<form action="/edit/<%= @event.id %>" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<input type="hidden" name="_method" value="patch">
+	<input type="hidden" name="event[user_id]" value="<%= current_user.id %>">
+	<label>Name: <input type="text" name="event[name]" value="<%= @event.name %>"></label>
+	<label>Description: <input type="text" name="event[description]" value="<%= @event.description %>"></label>
+	<label>When: <input type="datetime-local" name="event[when]" value="<%= @event.when %>"></label>
+	<label>Where: <input type="text" name="event[where]" value="<%= @event.where %>"></label>
+	<label>Attendees <input type="text" name="attendee[user_email]"></label>
+	<label>Items needed: <input type="text" name="item[items]"></label>
+	<button type="submit">UPDATE</button>
+</form>
+
+<form action="/events/<%= current_user.id %>" method="get">
+	<button type="submit">BACK</button>
+</form>
+</div>

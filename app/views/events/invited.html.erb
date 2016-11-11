@@ -1,0 +1,80 @@
+<style>
+	
+	@media only screen and (max-width: 480px){
+			body {background-image: url(/assets/BBQPoolParty.jpg);
+				background-size: cover;}
+		}
+
+		@media only screen and (min-width: 481px){
+			body {background-image: url(/assets/BBQPoolParty.jpg);
+			background-size: cover;}
+		}
+
+		@media only screen and (min-width: 1024px){
+			body {background-image: url(/assets/BBQPoolParty.jpg);
+			background-size: cover;}
+		}
+
+
+	#header{
+		display: inline-block;
+		vertical-align: top;
+		
+	}
+
+	#header a{
+		position: absolute;
+		top: 5px;
+		right: 25px;
+		text-align: right;
+	}
+
+
+	table{
+		width:1000px;
+	}
+
+	table, th, td{
+		border: 1px solid black;
+		margin 1px;
+		padding 1px;
+	}
+</style>
+
+<div id="header">
+<p> Here are the events you've been invited to:</p>
+<p><a href="/sessions" data-method="delete">Logout</a></p>
+</div>
+<div id="main">
+<p>
+<table>
+	<thead>	
+		<tr>
+			<th>Name</th>
+			<th>Date</th>
+			<th>When</th>
+			<th>Where</th>
+			<th>Organizer</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>	
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><a href="/users/">Attend</a> | <a href="/users/">Decline</a></td>
+		</tr>		
+	</tbody>
+</table>
+</p>
+</div>
+
+
+
+
+
+
+
